@@ -38,8 +38,8 @@ const update = async(User, req, res) => {
         return res.status(400).json({ error: 'Validations fails.' })
     }
 
-    const { email, oldPassword } = req.body;
     const user = User.findByPk(req.user.id);
+    const { email, oldPassword } = req.body;
 
     if (email !== user.email) {
         const userExists = await User.findOne({ where: {email} });
@@ -47,7 +47,6 @@ const update = async(User, req, res) => {
             return res.status(400).json({ error: 'User not available.' });
         }
     }
-
     if (oldPassword && !(await user.checkPassword(oldPassword))) {
         return res.status(401).json({ error: 'Wrong credentials.' })
     }
