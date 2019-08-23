@@ -14,9 +14,13 @@ export default function(sequelize, DataTypes) {
       user.password_hash = await gerarHash(user.password);
     }  
   })
-  
-  User.prototype.checkPassword = async function(password) {
+
+  User.checkPassword = async password => {
     return await bcrypt.compare(password, this.password_hash);
+  }
+
+  User.associate = models => {
+    User.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
   }
 
   return User;

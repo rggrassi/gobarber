@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import * as Yup from 'yup';
 
-const store = async(User, req, res) => {
+const store = async (User, req, res) => {
     const schema = Yup.object().shape({
         email: Yup.string().email().required(),
         password: Yup.string().required()

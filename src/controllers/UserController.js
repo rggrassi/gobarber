@@ -19,7 +19,7 @@ const store = async (User, req, res) => {
     return res.json({ id, name, email, provider });
 }
 
-const update = async(User, req, res) => {
+const update = async (User, req, res) => {
     const schema = Yup.object().shape({
         name: Yup.string(),
         email: Yup.string().email(),
@@ -38,21 +38,20 @@ const update = async(User, req, res) => {
         return res.status(400).json({ error: 'Validations fails.' })
     }
 
-    const user = User.findByPk(req.user.id);
-    const { email, oldPassword } = req.body;
+    const user = await User.findByPk(req.user.id);
 
-    if (email !== user.email) {
-        const userExists = await User.findOne({ where: {email} });
+    if (req.body.email && req.body.email !== user.email) {
+        const userExists = await User.findOne({ where: {email: req.body.email} });
         if (userExists) {
             return res.status(400).json({ error: 'User not available.' });
         }
     }
-    if (oldPassword && !(await user.checkPassword(oldPassword))) {
+
+    if (req.body.oldPassword && !(await user.checkPassword(req.body.oldPassword))) {
         return res.status(401).json({ error: 'Wrong credentials.' })
     }
 
-    const { id, name, provider } =  await user.update(req.body);
-
+    const { id, name, email, provider } = await user.update(req.body);
     return res.json({ id, name, email, provider });
 }
 
