@@ -4,6 +4,7 @@ import dbconfig from '../config/database';
 const sequelize = new Sequelize(dbconfig);
 const User = sequelize.import('../models/User');
 const File = sequelize.import('../models/File');
+const Appointment = sequelize.import('../models/Appointment');
 
 const { models } = sequelize;
 Object.keys(models).forEach(model => {
@@ -12,4 +13,4 @@ Object.keys(models).forEach(model => {
     }
 })
 
-export { User, File };
+export { User, File, Appointment };
