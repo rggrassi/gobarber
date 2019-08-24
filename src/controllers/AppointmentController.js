@@ -1,5 +1,23 @@
 import * as Yup from 'yup';
 
+const index = async({ Appointment, User, File }, req, res) => {
+  const appointments = await Appointment.findAll({
+    where: { user_id: req.user.id, canceled_at: null },
+    order: ['date'],
+    include: [{ 
+      model: User,
+      as: 'provider',
+      attributes: ['id', 'name'],
+      include: [{
+        model: File,
+        as: 'avatar',
+        attributes: ['id', 'path', 'url']
+      }]
+     }]
+  })
+  return res.json(appointments)
+}
+
 const store = async({ Appointment, User }, req, res) => {
   const schema = Yup.object().shape({
     provider_id: Yup.number().required(),
@@ -29,4 +47,4 @@ const store = async({ Appointment, User }, req, res) => {
   return res.json(appointment);
 }
 
-export default { store }
+export default { store, index }

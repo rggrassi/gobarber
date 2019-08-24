@@ -17,7 +17,10 @@ router.use(auth);
 
 router.put('/users', userController.update.bind(null, User));
 router.get('/providers', providerController.index.bind(null, { User, File }));
+
 router.post('/appointments', appointmentController.store.bind(null, { Appointment, User }));
+router.get('/appointments', appointmentController.index.bind(null, { Appointment, User, File }));
+
 router.post('/files', multer(multerConfig).single('file'), fileController.store.bind(null, File));
 
 
