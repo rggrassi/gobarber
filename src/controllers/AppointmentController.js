@@ -1,9 +1,16 @@
 import * as Yup from 'yup';
+import { startOfHour, parseISO, isBefore } from 'date-fns';
 
 const index = async({ Appointment, User, File }, req, res) => {
+
+  const { page = 1 } = req.query;
+
   const appointments = await Appointment.findAll({
     where: { user_id: req.user.id, canceled_at: null },
     order: ['date'],
+    attributes: ['id', 'date'],
+    limit: 20,
+    offset: (page - 1) * 20,
     include: [{ 
       model: User,
       as: 'provider',
@@ -30,12 +37,32 @@ const store = async({ Appointment, User }, req, res) => {
 
   const { provider_id, date } = req.body;
 
+  /**
+   * Chech if provider is provider
+   */
   const isProvider = await User.findOne({
     where: { id: provider_id, provider: true }
   })
-
   if (!isProvider) {
     return res.status(401).json({ error: 'You can only create appointments with providers' })
+  }
+
+  /**
+   * Check for past dates 
+   */
+  const hourStart = startOfHour(parseISO(date));
+  if (isBefore(hourStart, new Date())) {
+    return res.status(400).json({ error: 'Past dates are not permited.' })
+  }
+  
+  /**
+   * Check date availability
+   */
+  const notDateAvailable = await Appointment.findOne({
+    where: { provider_id, canceled_at: null, date: hourStart }
+  })
+  if (notDateAvailable) {
+    return res.status(400).json({ error: 'Appointment date no available.' })
   }
 
   const appointment = await Appointment.create({
