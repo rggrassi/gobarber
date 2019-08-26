@@ -22,9 +22,8 @@ router.get('/providers', providerController.index.bind(null, { User, File }));
 router.post('/appointments', appointmentController.store.bind(null, { Appointment, User }));
 router.get('/appointments', appointmentController.index.bind(null, { Appointment, User, File }));
 
-router.get('/schedule', ScheduleController.index.bind(null, { Appointment, User }))
+router.get('/schedule', ScheduleController.index.bind(null, { Appointment, User }));
 
 router.post('/files', multer(multerConfig).single('file'), fileController.store.bind(null, File));
-
 
 export default router;

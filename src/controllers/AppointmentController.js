@@ -1,8 +1,9 @@
 import * as Yup from 'yup';
-import { startOfHour, parseISO, isBefore } from 'date-fns';
+import { startOfHour, parseISO, isBefore, format } from 'date-fns';
+import ptBr from 'date-fns/locale/pt-BR';
+import Notification from '../schemas/Notification'
 
 const index = async({ Appointment, User, File }, req, res) => {
-
   const { page = 1 } = req.query;
 
   const appointments = await Appointment.findAll({
@@ -38,13 +39,20 @@ const store = async({ Appointment, User }, req, res) => {
   const { provider_id, date } = req.body;
 
   /**
-   * Chech if provider is provider
+   * Check if provider is provider
    */
   const isProvider = await User.findOne({
     where: { id: provider_id, provider: true }
   })
   if (!isProvider) {
     return res.status(401).json({ error: 'You can only create appointments with providers' })
+  }
+
+  /**
+   * Check if the customer is the service provider
+   */
+  if (provider_id === req.user.id) {
+    return res.status(401).json({ error: 'You cannot schedule a service for yourself.' })
   }
 
   /**
@@ -69,6 +77,15 @@ const store = async({ Appointment, User }, req, res) => {
     user_id: req.user.id,
     provider_id,
     date
+  })
+
+  /**
+   * Notify appointment provider
+   */
+  const formattedDate = format(hourStart, "'dia' dd 'de' MMMM', às' H:mm'h'", ptBr)
+  await Notification.create({
+    content: `Novo agendamento de ${req.user.name} para ${formattedDate}`,
+    user: provider_id
   })
 
   return res.json(appointment);
