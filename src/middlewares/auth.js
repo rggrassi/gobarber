@@ -7,8 +7,8 @@ export default (req, res, next) =>  {
     }
     const [bearer, token] = authorization.split(' ');
     try {
-        const { id, name, email } = jwt.verify(token, '14987141918f8c2c94ed19d9b82030db');        
-        req.user = { id, name, email };
+        const { id, name, email, provider } = jwt.verify(token, '14987141918f8c2c94ed19d9b82030db');        
+        req.user = { id, name, email, provider };
         return next();
     } catch (error) {
         res.status(401).json({ error: 'Token not valid' })

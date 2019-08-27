@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { startOfHour, parseISO, isBefore, format } from 'date-fns';
+import { startOfHour, parseISO, isBefore, format, subHours } from 'date-fns';
 import ptBr from 'date-fns/locale/pt-BR';
 import Notification from '../schemas/Notification'
 
@@ -91,4 +91,25 @@ const store = async({ Appointment, User }, req, res) => {
   return res.json(appointment);
 }
 
-export default { store, index }
+const remove = async(Appointment, req, res) => {
+  const appointment = await Appointment.findByPk(req.params.id);
+
+  if (appointment.user_id !== req.user.id) {
+    return res.status(401).json({ error: "You don't have permission to cancel this appointment." })
+  }
+
+  /**
+   * Check if the schedule date is less than two hours
+  */
+  const dateWithSub = subHours(appointment.date, 2);
+  if (isBefore(dateWithSub, new Date())) {
+    return res.status(401).json({ error: 'You can only cancel appointments 2 hours in advance.' })
+  }
+
+  appointment.canceled_at = new Date();
+  await appointment.save();
+
+  return res.json(appointment);
+}
+
+export default { store, index, remove }

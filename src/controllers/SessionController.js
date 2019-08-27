@@ -21,10 +21,10 @@ const store = async (User, req, res) => {
         return res.status(401).json({ error: 'Wrong credentials.' })
     }
 
-    const { id, name } = user;
+    const { id, name, provider } = user;
 
     return res.json({ 
-        token: jwt.sign({ id, name, email }, '14987141918f8c2c94ed19d9b82030db', { expiresIn: '7d' })
+        token: jwt.sign({ id, name, email, provider }, '14987141918f8c2c94ed19d9b82030db', { expiresIn: '7d' })
     })
 }
 
