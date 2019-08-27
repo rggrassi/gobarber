@@ -22,7 +22,7 @@ router.get('/providers', providerController.index.bind(null, { User, File }));
 
 router.post('/appointments', appointmentController.store.bind(null, { Appointment, User }));
 router.get('/appointments', appointmentController.index.bind(null, { Appointment, User, File }));
-router.delete('/appointments/:id', appointmentController.remove.bind(null, Appointment));
+router.delete('/appointments/:id', appointmentController.remove.bind(null, { Appointment, User } ));
 
 router.get('/schedule', scheduleController.index.bind(null, { Appointment, User }));
 router.get('/notifications', notificationController.index);

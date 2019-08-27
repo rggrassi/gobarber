@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 import { startOfHour, parseISO, isBefore, format, subHours } from 'date-fns';
 import ptBr from 'date-fns/locale/pt-BR';
 import Notification from '../schemas/Notification'
+import sendMail from '../lib/Mail';
 
 const index = async({ Appointment, User, File }, req, res) => {
   const { page = 1 } = req.query;
@@ -82,7 +83,7 @@ const store = async({ Appointment, User }, req, res) => {
   /**
    * Notify appointment provider
    */
-  const formattedDate = format(hourStart, "'dia' dd 'de' MMMM', às' H:mm'h'", ptBr)
+  const formattedDate = format(hourStart, "'dia' dd 'de' MMMM', às' H:mm'h'", { locale: ptBr })
   await Notification.create({
     content: `Novo agendamento de ${req.user.name} para ${formattedDate}`,
     user: provider_id
@@ -91,8 +92,10 @@ const store = async({ Appointment, User }, req, res) => {
   return res.json(appointment);
 }
 
-const remove = async(Appointment, req, res) => {
-  const appointment = await Appointment.findByPk(req.params.id);
+const remove = async({ Appointment, User }, req, res) => {
+  const appointment = await Appointment.findByPk(req.params.id, {
+    include: [{ model: User, as: 'provider', attributes: ['name', 'email'] }]
+  });
 
   if (appointment.user_id !== req.user.id) {
     return res.status(401).json({ error: "You don't have permission to cancel this appointment." })
@@ -108,6 +111,17 @@ const remove = async(Appointment, req, res) => {
 
   appointment.canceled_at = new Date();
   await appointment.save();
+
+  await sendMail({
+    to: `${appointment.provider.name} <${appointment.provider.email}>`,
+    subject: 'Agendamento cancelado',
+    template: 'cancellation',
+    context: {
+      provider: appointment.provider.name,
+      user: req.user.name,
+      date: format(appointment.date, "'dia' dd 'de' MMMM', às' H:mm'h'", { locale: ptBr })
+    }
+  })
 
   return res.json(appointment);
 }
