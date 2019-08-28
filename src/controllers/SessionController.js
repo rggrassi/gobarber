@@ -24,7 +24,7 @@ const store = async (User, req, res) => {
     const { id, name, provider } = user;
 
     return res.json({ 
-        token: jwt.sign({ id, name, email, provider }, '14987141918f8c2c94ed19d9b82030db', { expiresIn: '7d' })
+        token: jwt.sign({ id, name, email, provider }, process.env.APP_SECRET, { expiresIn: '7d' })
     })
 }
 

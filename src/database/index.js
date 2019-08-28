@@ -19,7 +19,7 @@ Object.keys(models).forEach(model => {
 /**
  * Define mongo's database
  */
-mongoose.connect('mongodb://localhost:27017/gobarber', {
+mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true, useFindAndModify: true
 })
 
