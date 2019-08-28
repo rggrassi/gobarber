@@ -26,5 +26,5 @@ transporter.use('compile', nodemailerhbs({
 }))
 
 export default function sendMail(email) {
-    return transporter.sendMail({ ...config.default, ...email });        
+    return transporter.sendMail({ ...config.default, ...email });                
 }
