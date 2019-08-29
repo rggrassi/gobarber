@@ -1,6 +1,4 @@
-# gobarber
-
-Aplicação no formato REST API para agendamento de serviços de salão de beleza.
+# GoBarber Sample Project API
 
 
 Projeto sendo desenvolvido durante o Bootcamp da RocketSeat.
