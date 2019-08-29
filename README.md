@@ -21,4 +21,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6I
 
 Gets a new Token/JWT for the required user.
 
-``POST /users/login`` (public): generates a new token for the required user.
+``POST /users`` (public): generates a new token for the required user.
+
+**Body example:**
+
+```
+{
+	"email": "rgrassi1@gmail.com",
+	"passwd": "123456"
+}
+```
