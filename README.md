@@ -12,3 +12,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6I
 ```
 
 > **Obs**: Projeto sendo desenvolvido durante o Bootcamp da RocketSeat.
+
+# Enpoints
+
+## Users:
