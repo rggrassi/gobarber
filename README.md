@@ -18,3 +18,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6I
 ## Users:
 
 ### Authenticate/login:
+
+Gets a new Token/JWT for the required user.
+
+``POST /users/login`` (public): generates a new token for the required user.
