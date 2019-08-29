@@ -16,3 +16,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6I
 # Enpoints
 
 ## Users:
+
+### Authenticate/login:
