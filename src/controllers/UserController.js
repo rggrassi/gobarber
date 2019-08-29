@@ -29,9 +29,9 @@ const update = async (User, req, res) => {
                 oldPassword ? field.required() : field 
             ),
         confirmPassword: Yup.string()
-            .when('password', (password, field) => {
+            .when('password', (password, field) =>
                 password ? field.required().oneOf([Yup.ref('password')]) : field
-            })    
+            )    
     }) 
 
     if (!(await schema.isValid(req.body))) {
