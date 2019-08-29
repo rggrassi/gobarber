@@ -5,4 +5,4 @@ This API was written in NodeJS (ExpressJS + JWT + Postgres + MongoDB). The idea 
 
 
 
-Projeto sendo desenvolvido durante o Bootcamp da RocketSeat.
+Obs: Projeto sendo desenvolvido durante o Bootcamp da RocketSeat.
