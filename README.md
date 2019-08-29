@@ -21,7 +21,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6I
 
 Gets a new Token/JWT for the required user.
 
-``POST /users`` (public): generates a new token for the required user.
+``POST /session`` (public): generates a new token for the required user.
 
 **Body example:**
 
@@ -31,3 +31,20 @@ Gets a new Token/JWT for the required user.
 	"passwd": "123456"
 }
 ```
+
+### Create a new user:
+
+This endpoint can be used for a new user to sign up for the application.
+
+``POST /users`` (public): creates a new user.
+
+**Body example:**
+
+```
+{
+	"name": "Rodrigo Grassi",
+	"email": "rgrassi1@gmail.com",
+	"password": "1213456"
+}
+```
+
