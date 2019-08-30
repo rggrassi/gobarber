@@ -89,3 +89,9 @@ This endpoint can be used for an authenticated customer or user to schedule an a
 
 ``GET /schedule`` (authentication required): gets day appointments for a service provider.
 
+
+## Available:
+
+## Ger available:
+
+``GET /available/:providerId`` (authentication required): get schedules available to a service provider.
