@@ -81,3 +81,11 @@ This endpoint can be used for an authenticated customer or user to schedule an a
 ### Remove a appointment:
 
 ``DELETE /appointments/:id`` (authentication required): removes a appointment.
+
+
+## Schedule:
+
+### Get schedule:
+
+``GET /schedule`` (authentication required): get day appointments for a service provider.
+
