@@ -95,3 +95,10 @@ This endpoint can be used for an authenticated customer or user to schedule an a
 ### Get available:
 
 ``GET /available/:providerId`` (authentication required): get schedules available to a service provider.
+
+
+## Notifications:
+
+### Get notifications:
+
+``GET /notifications`` (authentication required): get a user's notifications sent to service providers 
