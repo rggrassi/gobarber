@@ -92,6 +92,6 @@ This endpoint can be used for an authenticated customer or user to schedule an a
 
 ## Available:
 
-## Ger available:
+### Get available:
 
 ``GET /available/:providerId`` (authentication required): get schedules available to a service provider.
