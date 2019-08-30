@@ -101,4 +101,4 @@ This endpoint can be used for an authenticated customer or user to schedule an a
 
 ### Get notifications:
 
-``GET /notifications`` (authentication required): get a user's notifications sent to service providers 
+``GET /notifications`` (authentication required): get user notifications sent to a service provider.
