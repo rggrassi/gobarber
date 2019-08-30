@@ -48,3 +48,6 @@ This endpoint can be used for a new user to sign up for the application.
 }
 ```
 
+### Update user by id:
+
+``PUT /users`` (authentication required): update data for a specific user.
