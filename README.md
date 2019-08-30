@@ -74,7 +74,7 @@ This endpoint can be used for an authenticated customer or user to schedule an a
 
 ``GET /appointments`` (authentication required): get all appointments from logged in user.
 
-``GET /appointments?page=1`` (authentication required): get all appointments from logged in user.
+``GET /appointments?page=1`` (authentication required): get logged-in user appointments by segmenting by page.
 
 > **Obs:** paged search of 20 elements.
 
