@@ -44,7 +44,7 @@ This endpoint can be used for a new user to sign up for the application.
 {
 	"name": "Rodrigo Grassi",
 	"email": "rgrassi1@gmail.com",
-	"password": "1213456"
+	"password": "123456"
 }
 ```
 
