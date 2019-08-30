@@ -61,3 +61,12 @@ This endpoint can be used for an authenticated client or user to schedule a serv
 
 ``POST /appointments`` (authentication required): creates a new appointment to logged user.
 
+**Body example:**
+
+```
+{
+	"provider_id": 1,
+	"date": "2019-09-02T13:00:00-03:00"
+}
+````
+
