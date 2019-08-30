@@ -28,7 +28,7 @@ Gets a new Token/JWT for the required user.
 ```
 {
 	"email": "rgrassi1@gmail.com",
-	"passwd": "123456"
+	"password": "123456"
 }
 ```
 
