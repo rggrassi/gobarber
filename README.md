@@ -78,3 +78,6 @@ This endpoint can be used for an authenticated customer or user to schedule an a
 
 > **Obs:** paged search of 20 elements.
 
+### Remove a appointment:
+
+``DELETE /appointments/:id`` (authentication required): removes a appointment.
