@@ -57,7 +57,7 @@ This endpoint can be used for a new user to sign up for the application.
 
 ### Create a new appointment:
 
-This endpoint can be used for an authenticated client or user to schedule a service time.
+This endpoint can be used for an authenticated customer or user to schedule an appointment with a service provider.
 
 ``POST /appointments`` (authentication required): creates a new appointment to logged user.
 
