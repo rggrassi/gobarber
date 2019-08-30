@@ -51,3 +51,11 @@ This endpoint can be used for a new user to sign up for the application.
 ### Update user by id:
 
 ``PUT /users`` (authentication required): update data for a specific user.
+
+
+## Appointments:
+
+### Create a new appointment:
+
+This terminal can be used for an authenticated client or user to schedule a time.
+
