@@ -57,5 +57,5 @@ This endpoint can be used for a new user to sign up for the application.
 
 ### Create a new appointment:
 
-This terminal can be used for an authenticated client or user to schedule a time.
+This terminal can be used for an authenticated client or user to schedule a service time.
 
