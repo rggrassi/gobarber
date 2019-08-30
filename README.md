@@ -70,3 +70,7 @@ This endpoint can be used for an authenticated customer or user to schedule an a
 }
 ````
 
+### Get appointments:
+
+``GET /appointments`` (authentication required): get all appointments from logged in user.
+
