@@ -14,7 +14,7 @@ import availableController from '../controllers/AvailableController';
 import auth from '../middlewares/auth';
 
 router.post('/users', userController.store.bind(null, User));
-router.post('/session', sessionController.store.bind(null, User));
+router.post('/session', sessionController.store.bind(null, { User, File }));
 
 router.use(auth);
 

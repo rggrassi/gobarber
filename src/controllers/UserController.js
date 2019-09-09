@@ -51,8 +51,13 @@ const update = async (User, req, res) => {
         return res.status(401).json({ error: 'Wrong credentials.' })
     }
 
-    const { id, name, email, provider } = await user.update(req.body);
-    return res.json({ id, name, email, provider });
+    await user.update(req.body);
+
+    const { id, name, email, avatar } = await User.findByPk(req.user.id, {
+        include: [{  model: File, as: 'avatar', attributes: ['id', 'path', 'url'] }]
+    })
+
+    return res.json({ id, name, email, avatar });
 }
 
 export default { store, update }

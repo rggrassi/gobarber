@@ -1,12 +1,12 @@
 import { startOfDay, endOfDay, parseISO } from 'date-fns';
-import { Op } from 'sequelize'
+import { Op } from 'sequelize';
 
 const index = async ({ Appointment, User }, req, res) => {
   const isProvider = User.findOne({
     where: { id: req.user.id, provider: true }
   })
   if (!isProvider) {
-    return res.status(401).json({ error: 'User is not provider.' })
+    return res.status(401).json({ error: 'User is not provider.' });
   }
 
   const parseDate = parseISO(req.query.date);
@@ -18,6 +18,7 @@ const index = async ({ Appointment, User }, req, res) => {
         [Op.between]: [startOfDay(parseDate), endOfDay(parseDate)]
       }
     },
+    include: [{ model: User, as: 'user', attributes: ['name'] }],
     order: ['date']
   })
 
