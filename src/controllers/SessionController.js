@@ -12,7 +12,7 @@ const store = async ({ User, File }, req, res) => {
 
     const { email, password } = req.body;
 
-    const user = await User.findOne({ 
+    const user = await User.findOne({
         where: { email },
         include: [
             { model: File, as: 'avatar', attributes: ['id', 'path', 'url'] }
@@ -28,7 +28,8 @@ const store = async ({ User, File }, req, res) => {
 
     const { id, name, provider, avatar } = user;
 
-    return res.json({ 
+    return res.json({
+        user: { id, name, email, provider },
         token: jwt.sign({ id, name, email, provider, avatar }, process.env.APP_SECRET, { expiresIn: '7d' })
     })
 }
