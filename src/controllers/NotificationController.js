@@ -9,15 +9,13 @@ const index = async (req, res) => {
 }
 
 const update = async(req, res) => {
-  const notification = await Notification.findOnendUpdate(
+  const notification = await Notification.findByIdAndUpdate(
     req.params.id, 
     { read: true },
     { new: true }
   )
 
-  Notification.findOneAndUpdate
-
   return res.json(notification);
 }
 
-export default { index, update }
+export default { index, update } 
