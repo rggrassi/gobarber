@@ -19,7 +19,7 @@ const store = async (User, req, res) => {
     return res.json({ id, name, email, provider });
 }
 
-const update = async (User, req, res) => {
+const update = async ({ User, File }, req, res) => {
     const schema = Yup.object().shape({
         name: Yup.string(),
         email: Yup.string().email(),

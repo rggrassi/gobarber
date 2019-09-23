@@ -18,7 +18,7 @@ router.post('/session', sessionController.store.bind(null, { User, File }));
 
 router.use(auth);
 
-router.put('/users', userController.update.bind(null, User));
+router.put('/users', userController.update.bind(null, { User, File }));
 router.get('/providers', providerController.index.bind(null, { User, File }));
 
 router.post('/appointments', appointmentController.store.bind(null, { Appointment, User }));
